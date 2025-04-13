@@ -2,5 +2,5 @@ package projeto.model.servico;
 
 public enum PedidoStatus {
     Aprovado,
-    NaoAprovado;
+    Nao_Aprovado;
 }

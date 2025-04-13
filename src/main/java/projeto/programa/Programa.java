@@ -53,7 +53,10 @@ public class Programa {
                    System.out.println("\n=== COMPRA DE BILHETE ===");
                    comprarBilhete(passageiro);
                }
-               case 4 -> verificarCheckin(bilheteEmitidos);
+               case 4 -> {
+                   System.out.println("\n=== VERIFICANDO CHECK-IN ===");
+                   verificarCheckin(bilheteEmitidos);
+               }
                 case 5 -> System.out.println(GREEN + "Finalizando Programa..." + RESET);
                 default -> {
                     // Impedir delay do print sob o menu
@@ -101,9 +104,9 @@ public class Programa {
             System.out.print("Destino do Voo (RJ, RS, SC, SP): ");
             String destino = scan.next();
             switch (destino.toUpperCase()) {
-                case "ES" -> destino = "Espírito Santo";
                 case "RJ" -> destino = "Rio de Janeiro";
                 case "RS" -> destino = "Rio Grande do Sul";
+                case "SC" -> destino = "Santa Catarina";
                 case "SP" -> destino = "São Paulo";
                 default -> {
                     System.out.println(RED + "Destino Invalido!\n" + RESET);
@@ -158,12 +161,12 @@ public class Programa {
         }
     }
     public static void verificarCheckin(List<Bilhete> bilheteEmitidos) {
-        System.out.println("CPF:");
+        System.out.print("CPF: ");
         String cpf = scan.next();
         Bilhete bilheteSelecionado = null;
         for (Bilhete bilhete : bilheteEmitidos) {
             if (bilhete.getPassageiro().getCpf().equalsIgnoreCase(cpf)) {
-                System.out.println(GREEN + "Bilhete Encontrado!" + RESET);
+                System.out.println(GREEN + "Bilhete Encontrado!\n" + RESET);
                 bilheteSelecionado = bilhete;
                 System.out.println(bilheteSelecionado);
                 break;
@@ -171,7 +174,7 @@ public class Programa {
         }
 
         if (bilheteSelecionado == null) {
-            System.out.println(RED + "Bilhete não Encontrado para o CPF Informado." + RESET);
+            System.out.println(RED + "Bilhete não Encontrado para o CPF Informado.\n" + RESET);
             return;
         }
 
@@ -184,7 +187,7 @@ public class Programa {
             pedidoStatus = PedidoStatus.Aprovado;
             }
         else {
-            pedidoStatus = PedidoStatus.NaoAprovado;
+            pedidoStatus = PedidoStatus.Nao_Aprovado;
         }
 
         Checkin checkin = new Checkin(horarioCheckin, bilheteSelecionado, pedidoStatus);
